@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>problem</title>
+</head>
+    <script>
+        <!--홀짝 확인 함수-->
+        function dicisionfn() {
+            var a = parseInt(document.getElementById("num1").value);
+            var data;
+            if (a % 2 == 0) {data = 'a는 eeve입니다.';}
+            else {data = 0 'a는 odd입니다';}
+            document.getElementByID('result').innerHTML = data;
+        }   
+        //calcnum 함수 만들기 num1이랑 num2를 입력받아서 버튼 누르면 두개 더한값이 출력된다-->
+        function calcnum() {
+            const num1Input = document.getElementById('num1');
+            const num2Input = document.getElementById('num2');
+            const resultInput = document.getElementById('calc_result');
+            //입출력은 문자열인데 계산하려면 숫자가 되어야한다-->
+            // <!-- parseInt(정수)-->
+            // <!-- 만약 숫자만 입력되어야하는데, 숫자 문자가 결합되거나
+            //문자만 들어오면 연산에 error / NA-->
+            // <!-- || or , && and-->
+            // <!-- 파이썬에서는 if인데 JS에서는 맨 뒤에 ||를 붙여서 사용한다-->
+            const num1 = parseFloat(num1Input.value) || 0;
+            const num2 = parseFloat(num2Input.value) || 0;
+            resultInput.value = num1 + num2
+        }
+    </script>
+<body>
+    <form name="calc">
+        <input type="number" id="num1" class="btn btn-success" value="0">
+        <input type="number" id="num2" class="btn btn-success" value="0">
+        <br>
+        <button type="button" class="btn btn-success" onclick="calcnum()">계산</button>
+        <br><br>
+        <span>=</span>
+        <input type="text" id="calc_result" value="0">
+    </form>
+<div id = 'result'></div>
+    <button type="button" class="btn btn-success" onclick="discisionfn()">odd-even check</button>
+</body>
+</html>

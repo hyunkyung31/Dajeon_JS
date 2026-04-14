@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>function_call</title>
+        <script> type = "text/javascript"
+            myFunction(); //hoisting 작동 :함수 정의, 함수정의를 중간에 선언해도 맨 선두로 hoisting
+            function myFunction(){ // JS에서 함수는 1급 객체
+                carName = '소나타';
+            }
+            // python에서도 실시간으로 변수, 함수 추가가 가능 == JS에서도 가능하다
+            function person(first, last, age, eye){
+                this.firstName = first; //멤버변수
+                this.address = last;
+                this.age = age;
+                this.eyeColor = eye;
+            }
+            var myFather = new person('서울남', '서울시 종로구', '50', 'blue'); //new는 동적 메모리 할당할때 붙인다
+            var myMother = new person('메로나', '제주도 감귤', '48', 'green');
+            //변수의 종류는 var(함수범위나 전역변수), let(블록안 {}), const(상수)
+            //var는 재정의가 가능, 뒤의 것이 우선
+            //let은 재정의가 불가능, 값의 변화는 가능
+            //const 재정의, 값변화 모두 불가능
+            // 요즘은 var를 안붙이고 let을 쓰는 추세
+            // 요즘은 class 쓰는게 추세
+            class Member{ //자바스크립트에서는 오버로딩이 없다 (데이터 타입을 주지 않기 때문), 오버라이딩은 있음(prototype linking)
+                constructor(name, city, role) { 
+                    this.name = name;
+                    this.city = city;
+                    this.role = role;
+                }
+                //클래스 내부에 메서드 (함수)
+                getIntroduction(){
+                    return `안녕하세요, ${this.city}에 사는 ${this.name}(${this.role})입니다.`;
+                }
+            }
+            const newMember = new Member('홍길동', '부산', '관리자');
+            console.log(newMember.getIntroduction()); //제대로된 값이 들어갔는지 확인용
+            function showData() {
+                const demo = document.getElementById('demo');
+                demo.innerHTML = `멤버 : ${newMember.name},  포스트 제목 : ${newMember.city}`;
+            }
+        </script>
+</head>
+<body>
+    <p id = 'demo'></p>
+    <button onclick = "document.getElementById('demo').innerHTML=Date()">시간은?</button>
+    <button onclick = 'showData()'>클래스 데이터 확인</button>
+</body>
+</html>

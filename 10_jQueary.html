@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <title>jQueary</title>
+
+<script type="text/javascript">
+    $(document).ready(function(){ //준비가 될때 함수가 작동한다
+	var personList=[{name:"홍길동",age:27},
+		{name:"김길동",age:31},{name:"신길동",age:35},
+		{name:"마길동",age:21} ]; // json
+	$.each( personList, function(index, item){ //personlist에 있는 내용을 순서대로 넘겨준다
+		if( index == 0 ){
+			alert("첫째:"+index+ ":"+ item.name + ":"+item.age ); //0이면 메세지가 뜬다
+		}
+		if( index == ( personList.length -1) ){
+			alert("마지막에:"+index+ ":"+ item.name + ":"+item.age );
+		}
+		$("tr").eq(index).html("<td>"+item.name+"</td><td>"+item.age+"</td>");
+	});	//eq = equal (관계연산자를 함수화 시킨 것 = 각 인덱스에다 데이터를 집어 넣어라)
+});
+</script>
+</head>
+<body>
+<table align="center" border>
+    <tr><td></td><td></td></tr>
+    <tr><td></td><td></td></tr>
+    <tr><td></td><td></td></tr>
+    <tr><td></td><td></td></tr>
+</table>
+</body>
+</html>
+

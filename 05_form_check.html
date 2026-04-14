@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form_check</title>
+    <script>
+        function show(){
+            form = document.forms[0]; // forms 배열 // 창의 최상위가 window 도큐먼트는 없이 써도 된다 // 문서의 최상위는 document
+            n = form.irum.value; 
+            // 인풋데이터 검증
+            // name은 중복될 수 없다
+            if(n == "") // n이 아무것도 없으면 => false 
+            {
+                alert("이름을 입력하세요"); //경고창 출력
+                form.irum.focus(); // 커서를 깜빡이는게 (이동위치) focus
+                return;
+            }
+            if(form.sung[0].checked) // checkbox(여러개 중복 선택 가능), radiobox(한개만 선택 가능)는 중복이 가능하다
+                s = "남자";
+            else 
+                s = "여자";
+            str = "";
+            for(i = 0; i<form.like.length; i++) // checkbox 중복이 가능하니까 / 배열에서 length를 많이 쓴다
+            {
+                if(form.like[i].checked) //체크 됐으면
+                {
+                if(str == "")
+                    str = form.like[i].value; // 몇번째 배열에 check되어있는지 value를 찾아서 문자열을 만들고 
+                else
+                    str += " , " + form.like[i].value; //더해줘라
+                }
+            }
+            data = n + "씨\n"; //n에 이름을 출력하고
+            data += "당신은" + s + "이고,\n"; //s 성을 출력하고
+            if(str =="")
+                data += "취미가 없군요!!";
+            else
+                data += "취미는" + str + "이군요!";
+            form.result.value = data; //다 합쳐서 from.result.value에 다 출력해라
+
+            localStorage.setItem("like", data);
+            const getData = localStorage.getItem("like");
+            console.log("선택한 내용 :", getData);
+            
+        const userSetting = { //객체
+            theme : "dark",
+            fontSize : 16,
+            lastVisit : "2024-05-22"
+            };
+            // 저장 , 객체를 그대로 저장하지 못하고 문자열로 만들어서 저장 (JSON)
+            localStorage.setItem("user_pref", JSON.stringify(userSetting)); //usersetiing을 스트링파이해서 문자열로 만들어서 저장한다 "user_pref"로 저장
+            const saveData = localStorage.getItem("user_pref"); //문자열 "user_pref"로 가져옴
+            if (savedData) { // 문자열을 객체로 변환시킨다
+                const parsedData = JSON.parse(savedData); // parse를 이용해서 문자열을 객체로 변환시킨다
+                console.log("불러온 테마 :", parsedData.theme);
+                }
+        }
+    </script>
+</head>
+<body>  <!-- 계층적 저장-->
+    <form>
+    이름 : <input type="text" name="irum"><p> 
+    성별 : <input type="radio" name="sung" checked>남자 
+        <input type="radio" name="sung">여자<p>
+    취미 : <input type="checkbox" name="like" value="등산">등산
+        <input type="checkbox" name="like" value="낚시">낚시 
+        <input type="checkbox" name="like" value="바둑">바둑 
+        <input type="checkbox" name="like" value="장기">장기
+        <input type="checkbox" name="like" value="독서">독서
+        <input type="checkbox" name="like" value="게임">게임<p>
+
+    <input type="button" value="결과확인" onclick="show()"><p>
+    <textarea cols="40" rows="15" name="result"></textarea>
+
+
+
+
+    </form> 
+</body>
+</html>
+
+<!-- form에서 입력된 내용을 localstorage에 저장하고 출력한 다음 console로그로 출력하시오-->

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .card { border: 1px solid #ccc; padding: 10px; margin: 5px; border-radius: 8px; background: #f9f9f9; }
+        .high-salary { border-color: gold; background: #fffde7; }
+    </style>
+    <title>array_CRUD</title>
+</head>
+<body>
+    <h2> 사원 정보 관리 시스템 (Object + Array) </h2>
+    <div id = 'employee-list'></div>
+    <div id = 'display'></div>
+    <script>
+        function Employee(id, name, salary, dept) {
+            this.id = id;
+            this.name = name;
+            this.salary = salary;
+            this.dept = dept;
+            this.getInfo = function() {
+                return `[${this.dept}] ${this.name} (사번: ${this.id})`;
+            };
+        }
+        var employees = [ //배열 - 객체는 모두 동적할당
+            new Employee(101, '김철수', 5000, '개발팀'),
+            new Employee(102, '이영희', 7000, '디자인팀'),
+            new Employee(103, '박지성', 4500, '영업팀')
+        ];
+        var newEmp = new Employee(104, '최강민', 9000, '전력팀');
+        newEmp.isManager = true; //멤버변수 추가
+        employees.push(newEmp); // 제거는 pop
+
+        var listContainer = document.getElementById('employee-list');
+        employees.forEach(function(emp) { //함수형 프로그래밍의 각 행의 데이터에 함수를 적용
+            var card = document.createElement('div');
+            card.className = 'card'; // class를 적용 -> css의 클래스 의미
+            if (emp.salary >= 6000) {
+                //클래스를 여러개 적용해야 할 때
+                card.classList.add('high-salary'); // classlist도 배열인데 특별한 함수를 작성 // 제거할때는 remove
+            }
+            card.innerHTML = `
+                <h3>${emp.getInfo()}</h3>
+                <p>급여 : ${emp.salary.toLocaleString()}</p> 
+                <p>특이사항 : ${emp.isManager ? "<b>팀장</b>" : "일반"}</p>
+                `;
+            listContainer.appendChild(card); //tag는 hierachical하게 구성(트리로 구성)
+        });
+        function createEmployee(newEmp) {
+            employees.push(newEmp) ;
+            console.log('C : 데이터 추가 완료, newEmp');
+        }
+        function readEmployee() {
+            console.log('R: 전체 목록 조회');
+            console.table(employees); //콘솔에 배열데이터를 보기 좋게 출력
+            const display = document.getElementById('display');
+            // for문이 생략
+            display.innerHTML = employees.map(e => `<li>${e.name} (${e.dept})</li>`).join(''); //e가 매개변수, 화살표함수(무명함수), join으로 문자열 결합
+            // join = e처리되서 나가면, 결과 4개를 문자열로 결합하시오
+            // 결과.함수 => chaining
+        }
+        // 삼항연산자 ? 맞으면 ...emp (... 전개연산자) 
+        function updateSalary(id, newSalary) { // 값과 타입까지 같아야 한다 / 10 === "10" 값은 같아도 type이 달라서 false가 나온다
+            employees = employees.map(emp =>
+                emp.id === id ? { ...emp, salary :newSalary} : emp
+            );
+            console.log(`U : ${id}번 사원 급여 수정 완료`);
+        }
+        function deleteEmployee(id) {
+            employees = employees.filter(emp => emp.id !== id);
+            console.log(`D : ${id}번 사원 삭제 완료`);
+        }
+        readEmployee();
+        createEmployee({ id : 3, name:  "박지성", dept : "영업", salary :4500});
+        readEmployee();
+        updateSalary(2, 8000);
+        readEmployee();
+        deleteEmployee(1);
+        readEmployee(); 
+
+    </script>
+</body>
+</html>

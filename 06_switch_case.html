@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>switch_case</title>
+</head>
+<body>
+    <input type = "button" value= "네이버로 가기" onclick = "move(1)"><br>
+    <input type = "button" value= "새로고침" onclic = "move(2)"><br>
+    <input type = "button" value= "구글로 가기" onclick = "move(3)"><br>
+    <script>
+        Back = new Array("gom1.jpg", "gom2.jpg", "gom3.gif") //array자체로 인스턴스 가능하다
+        index = Math.floor(Math.random()*3); //math함수는 정적함수들로만 이루어져있다. 그래서 인스턴스 없이 바로 사용가능하다
+        document.write("<body background =" + Back[index] + ">");
+        document.write("<b>접속할 때마다 랜덤으로 이미지 출력 .....!<b>");
+        
+        function move(a)
+        { //스위치케이스는 c, java script 원래 있고, 파이썬에서도 근래 업뎃됨
+            switch(a){ //스위치 케이스문은 모두 다 if문으로 변경가능하다
+                case 1 : loacation.href = "'http://www.naver.com'"; break; //break가 있어야한다 
+                case 2 : location.reload(); break;
+                case 3 : location.replace("http://www.google.com"); break;
+            }
+        }
+    </script>
+</body>
+</html>

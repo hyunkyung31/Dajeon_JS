@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>object</title>
+</head>
+<body>
+    <h2>자바스크립트의 오브젝트</h2>
+    <p id = 'demo'></p>
+    <p id = 'demo2'></p>
+    <p id = 'demo3'></p>
+    <p id = 'demo4'></p>
+
+    <script>
+        var car = {type : 'Fiat', model : '500', color : 'white'};
+    document.getElementById('demo').innerHTML = car;
+    document.getElementById('demo2').innerHTML = 'The car type is' + car.type;
+    
+    var person = { //객체 생성
+        firstName : 'John',
+        lastName : 'Doe',
+        Id       : 5566,
+
+        fullName : function() {
+            return this.firstName + " " + this.lastName;
+        }
+    };
+    document.getElementById('demo3').innerHTML = person.fullName();
+
+    var emp = new Object(); //자바스크립트의 최상위 객체
+    emp.id = 101; // 실시간으로 멤버변수 추가
+    emp.name = '대한민국';
+    emp.salary = 50000;
+    document.getElementById('demo4').innerHTML = emp.id + ' ' + emp.name + ' ' + emp.salary;
+    </script>
+</body>
+</html>

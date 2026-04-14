@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calc</title>
+</head>
+<body>
+    <script>
+        // var(사용 지양, 함수 및 전역 사용) let{}, const(상수)
+        var x = 10; // 전역
+        var y = 20;
+        var z = x + y
+        document.write(z) ; //document에 출력
+        function myFunction() {
+            var x = document.getElementsByTagName('LI'); //리턴을 배열로한다
+            document.getElementById('demo').innerHTML = x[1].innerHTML;
+        }
+    </script>
+    <p>Unordered 리스트</p>
+    <ul>
+        <li> 커피 </li> <!--0-->
+        <li> 주스 </li> <!--1-->
+        <li> 제과 </li> <!--2-->
+    </ul>
+    <button onclick = 'myFunction()'> 버튼 작동 </button>
+    <p id = 'demo'></p>
+</body>
+</html>
